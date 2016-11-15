@@ -5,5 +5,5 @@ Passively listens for DHCP leases on the local network and automatically serves 
 
 Usage:
 
-    go build -i
+    go get; go build
     ./localdns <interface>
