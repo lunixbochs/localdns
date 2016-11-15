@@ -1,0 +1,9 @@
+localdns
+----
+
+Passively listens for DHCP leases on the local network and automatically serves the hostname to IP mapping over DNS.
+
+Usage:
+
+    go build -i
+    ./localdns <interface>
