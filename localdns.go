@@ -56,6 +56,22 @@ func main() {
 		log.Fatal(err)
 	}
 
+	hostname, err := os.Hostname()
+	if err == nil {
+		ifv, err := net.InterfaceByName(os.Args[1])
+		if err != nil {
+			log.Fatal(err)
+		}
+		addrs, err := ifv.Addrs()
+		if err != nil {
+			log.Fatal(err)
+		}
+		for _, addr := range addrs {
+			ipnet := addr.(*net.IPNet)
+			dhcpMap[hostname] = ipnet.IP
+		}
+	}
+
 	server := &dns.Server{Addr: ":53", Net: "udp"}
 	go server.ListenAndServe()
 	dns.HandleFunc(".", handleRequest)
